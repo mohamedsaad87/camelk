@@ -1,0 +1,26 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: amqp-to-log
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: jms-amqp-10-source
+    properties:
+      #remoteURI: "amqp://ex-aao-hdls-svc.amq:5672"
+      remoteURI: "failover:(amqp://ex-aao-my-acceptor-0-svc.myamq:5672,amqp://ex-aao-my-acceptor-1-svc.myamq:5672)?failover.maxReconnectAttempts=16&jms.prefetchPolicy.all=5&jms.forceSyncSend=true"
+      destinationName: dev.myapp.queue.v0
+      destinationType: "queue"
+      userName: rob
+      password: robspassword
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: log-sink
+    properties:
+      showStreams: true
+      showHeaders: true
+

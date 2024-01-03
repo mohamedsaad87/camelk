@@ -1,0 +1,8 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.camel.gea.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:echo>
+         <ser:arg0>test</ser:arg0>
+      </ser:echo>
+   </soapenv:Body>
+</soapenv:Envelope>

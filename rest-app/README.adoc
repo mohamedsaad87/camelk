@@ -1,0 +1,18 @@
+= Commands
+
+.Create secret for kafka connection
+```bash
+oc create secret generic kafka-props --from-file application.properties
+```
+
+.Run integration via `kamel` cli
+```bash
+kamel run Hello.java --name rest-app --open-api file:hello-api.json --resource file:hello-api.json --resource file:adm/request.adm --resource file:adm/response.adm --property api.resources=file:/etc/camel/resources --property backend-ep=soap-app.demo.svc/service/SampleRoute --config secret:kafka-props
+```
+
+.Call Open API Endpoint
+```bash
+curl -v \
+-H "content-type: application/json" \
+'http://rest-app-demo.apps.cluster-6km6w.6km6w.sandbox1144.opentlc.com/hello?name=test'
+```

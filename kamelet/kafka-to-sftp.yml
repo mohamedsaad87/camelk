@@ -1,0 +1,27 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: kafka-to-sftp
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-source
+    properties:
+      bootstrapServers: "my-cluster-kafka-bootstrap.kafka:9092"
+      securityProtocol: "PLAINTEXT"
+      topic: "test"
+      user: "testuser"
+      password: "testpassword"
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: sftp-sink
+    properties:
+      connectionHost: "sftp.sftp"
+      connectionPort: "22"
+      directoryName: "/upload"
+      username: "foo"
+      password: "123"

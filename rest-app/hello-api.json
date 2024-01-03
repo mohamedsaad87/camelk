@@ -1,0 +1,62 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "hello",
+        "version": "1.0.0",
+        "description": "A brand new API with no content.  Go nuts!"
+    },
+    "paths": {
+        "/hello": {
+            "get": {
+                "parameters": [
+                    {
+                        "name": "name",
+                        "description": "Name of the customer",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/resp"
+                                },
+                                "examples": {
+                                    "ex-response": {
+                                        "value": {
+                                            "msg": "some text"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Response sent with a get param"
+                    }
+                },
+                "operationId": "hello"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "resp": {
+                "title": "Root Type for resp",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "msg": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "msg": "Hello user"
+                }
+            }
+        }
+    }
+}

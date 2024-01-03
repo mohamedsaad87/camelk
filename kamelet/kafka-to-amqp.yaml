@@ -1,0 +1,26 @@
+apiVersion: camel.apache.org/v1alpha1
+kind: KameletBinding
+metadata:
+  name: kafka-to-amqp
+spec:
+  source:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: kafka-source
+    properties:
+      bootstrapServers: "my-cluster-kafka-bootstrap.kafka:9092"
+      securityProtocol: "PLAINTEXT"
+      topic: "test"
+      user: "testuser"
+      password: "testpassword"
+  sink:
+    ref:
+      kind: Kamelet
+      apiVersion: camel.apache.org/v1alpha1
+      name: jms-amqp-10-sink
+    properties:
+      remoteURI: "amqp://ex-aao-hdls-svc.amq:5672"
+      destinationName: "myTopicAddress"
+      destinationType: "topic"
+
